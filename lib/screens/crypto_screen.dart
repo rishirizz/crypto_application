@@ -17,10 +17,12 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   bool isSecondApiCallProcess = false;
   bool isOrderBookViewed = false;
   Map cryptoMap = {};
+  TextEditingController cryptoTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    cryptoTextController.text = '';
     getTickerData();
     // getOrderBookData();
   }
@@ -31,7 +33,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
       child: Scaffold(
         floatingActionButton: (dataPresent)
             ? FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  getTickerData();
+                },
                 child: const Icon(
                   Icons.sync,
                 ),
@@ -54,7 +58,14 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                           alignment: Alignment.centerRight,
                           children: [
                             TextField(
-                              onChanged: (value) {},
+                              onChanged: (value) {
+                                cryptoTextController.text = value;
+                                if (value.isEmpty) {
+                                  setState(() {
+                                    dataPresent = false;
+                                  });
+                                }
+                              },
                               decoration: InputDecoration(
                                 fillColor: Colors.black.withOpacity(0.1),
                                 filled: true,
@@ -70,7 +81,13 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                             Positioned(
                               right: 10,
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    if (cryptoTextController.text.length > 3) {
+                                      dataPresent = true;
+                                    }
+                                  });
+                                },
                                 icon: const Icon(Icons.search),
                               ),
                             ),
