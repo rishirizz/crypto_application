@@ -21,7 +21,7 @@ TextStyle secondaryTextStyle = const TextStyle(
   fontWeight: FontWeight.w300,
 );
 
-TextStyle tertiaryTextStyle = const TextStyle(
-  fontSize: 8,
-  fontWeight: FontWeight.w200,
+TextStyle tableHeadingTextStyle = const TextStyle(
+  fontSize: 10,
+  fontWeight: FontWeight.bold,
 );

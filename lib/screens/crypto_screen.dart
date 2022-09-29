@@ -14,13 +14,15 @@ class CryptoCurrencyScreen extends StatefulWidget {
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   bool dataPresent = true;
   bool isApiCallProcess = false;
+  bool isSecondApiCallProcess = false;
   bool isOrderBookViewed = false;
   Map cryptoMap = {};
 
   @override
   void initState() {
     super.initState();
-    getCryptoCurrency();
+    getTickerData();
+    // getOrderBookData();
   }
 
   @override
@@ -89,7 +91,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'BTCUSD',
+                                  'ETHUSD',
                                   style: cryptoNameStyle,
                                 ),
                                 Text(
@@ -182,14 +184,14 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  isOrderBookViewed = !isOrderBookViewed;
-                                });
-                              },
-                              child: Align(
-                                alignment: Alignment.centerRight,
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isOrderBookViewed = !isOrderBookViewed;
+                                  });
+                                },
                                 child: Text(
                                   (!isOrderBookViewed)
                                       ? 'VIEW ORDER BOOK'
@@ -206,8 +208,42 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                             ),
                             if (isOrderBookViewed)
                               Card(
-                                child: Text('sadafsg'),
-                              )
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              'BID PRICE',
+                                              style: tableHeadingTextStyle,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'QTY',
+                                              style: tableHeadingTextStyle,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'QTY',
+                                              style: tableHeadingTextStyle,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'ASK PRICE',
+                                              style: tableHeadingTextStyle,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),
@@ -219,15 +255,29 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
     );
   }
 
-  getCryptoCurrency() {
+  getTickerData() {
     setState(() {
       isApiCallProcess = true;
     });
-    getCryptoCurrencyData().then((response) {
+    getCryptoCurrencyTickerData().then((response) {
       setState(() {
         isApiCallProcess = false;
         cryptoMap = Map<String, dynamic>.from(response);
         debugPrint('Response is ====> $cryptoMap');
+
+      });
+    });
+  }
+
+  getOrderBookData() {
+    setState(() {
+      isSecondApiCallProcess = true;
+    });
+    getCryptoCurrencyOrderBookData().then((response) {
+      setState(() {
+        isSecondApiCallProcess = false;
+        cryptoMap = Map<String, dynamic>.from(response);
+        // debugPrint('Response is ====> $cryptoMap');
       });
     });
   }
