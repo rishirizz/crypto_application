@@ -12,7 +12,7 @@ class CryptoCurrencyScreen extends StatefulWidget {
 }
 
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
-  bool dataPresent = true;
+  bool dataPresent = false;
   bool isApiCallProcess = false;
   bool isSecondApiCallProcess = false;
   bool isOrderBookViewed = false;
@@ -29,12 +29,14 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(
-            Icons.sync,
-          ),
-        ),
+        floatingActionButton: (dataPresent)
+            ? FloatingActionButton(
+                onPressed: () {},
+                child: const Icon(
+                  Icons.sync,
+                ),
+              )
+            : null,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -264,7 +266,6 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
         isApiCallProcess = false;
         cryptoMap = Map<String, dynamic>.from(response);
         debugPrint('Response is ====> $cryptoMap');
-
       });
     });
   }
