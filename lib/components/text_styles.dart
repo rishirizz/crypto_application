@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-TextStyle cardHeaderTextStyle = const TextStyle(
+TextStyle cryptoNameStyle = const TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 13,
-  color: Color(0xff707070),
+  fontSize: 30,
 );
 
-TextStyle cardPrimaryTextStyle = const TextStyle(
-  fontWeight: FontWeight.normal,
+TextStyle cryptoValueStyle = const TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 16,
+);
+
+TextStyle primaryTextStyle = const TextStyle(
+  fontWeight: FontWeight.w500,
   fontSize: 13,
 );
 
-TextStyle cardSecondaryTextStyle = const TextStyle(
+TextStyle secondaryTextStyle = const TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w300,
 );
 
-TextStyle cardTertiaryTextStyle = const TextStyle(
+TextStyle tertiaryTextStyle = const TextStyle(
   fontSize: 8,
   fontWeight: FontWeight.w200,
 );

@@ -1,4 +1,5 @@
 import 'package:crypto_app/api_service/api_service.dart';
+import 'package:crypto_app/components/text_styles.dart';
 import 'package:crypto_app/screens/no_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +14,7 @@ class CryptoCurrencyScreen extends StatefulWidget {
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   bool dataPresent = true;
   bool isApiCallProcess = false;
+  bool isOrderBookViewed = false;
   Map cryptoMap = {};
 
   @override
@@ -86,17 +88,15 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   'BTCUSD',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 40,
-                                  ),
+                                  style: cryptoNameStyle,
                                 ),
                                 Text(
                                   DateFormat.yMMMEd()
                                       .add_Hms()
                                       .format(DateTime.now()),
+                                  style: secondaryTextStyle,
                                 ),
                               ],
                             ),
@@ -109,15 +109,27 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('OPEN'),
-                                    Text('\$ ${cryptoMap['open']}'),
+                                    Text(
+                                      'OPEN',
+                                      style: primaryTextStyle,
+                                    ),
+                                    Text(
+                                      '\$ ${cryptoMap['open']}',
+                                      style: cryptoValueStyle,
+                                    ),
                                   ],
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('HIGH'),
-                                    Text('\$ ${cryptoMap['high']}'),
+                                    Text(
+                                      'HIGH',
+                                      style: primaryTextStyle,
+                                    ),
+                                    Text(
+                                      '\$ ${cryptoMap['high']}',
+                                      style: cryptoValueStyle,
+                                    ),
                                   ],
                                 ),
                               ],
@@ -131,15 +143,27 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('LOW'),
-                                    Text('\$ ${cryptoMap['low']}'),
+                                    Text(
+                                      'LOW',
+                                      style: primaryTextStyle,
+                                    ),
+                                    Text(
+                                      '\$ ${cryptoMap['low']}',
+                                      style: cryptoValueStyle,
+                                    ),
                                   ],
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('LAST'),
-                                    Text('\$ ${cryptoMap['last']}'),
+                                    Text(
+                                      'LAST',
+                                      style: primaryTextStyle,
+                                    ),
+                                    Text(
+                                      '\$ ${cryptoMap['last']}',
+                                      style: cryptoValueStyle,
+                                    ),
                                   ],
                                 ),
                               ],
@@ -147,8 +171,43 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text('VOLUME'),
-                            Text('\$ ${cryptoMap['volume']}'),
+                            Text(
+                              'VOLUME',
+                              style: primaryTextStyle,
+                            ),
+                            Text(
+                              '\$ ${cryptoMap['volume']}',
+                              style: cryptoValueStyle,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isOrderBookViewed = !isOrderBookViewed;
+                                });
+                              },
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  (!isOrderBookViewed)
+                                      ? 'VIEW ORDER BOOK'
+                                      : 'HIDE ORDER BOOK',
+                                  style: cryptoValueStyle.copyWith(
+                                    color: Colors.purple,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            if (isOrderBookViewed)
+                              Card(
+                                child: Text('sadafsg'),
+                              )
                           ],
                         ),
                       ),
