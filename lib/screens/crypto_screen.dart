@@ -1,7 +1,7 @@
 import 'package:crypto_app/api_service/api_service.dart';
-import 'package:crypto_app/screens/data_widget.dart';
 import 'package:crypto_app/screens/no_data_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CryptoCurrencyScreen extends StatefulWidget {
   const CryptoCurrencyScreen({super.key});
@@ -11,7 +11,7 @@ class CryptoCurrencyScreen extends StatefulWidget {
 }
 
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
-  bool dataPresent = false;
+  bool dataPresent = true;
   bool isApiCallProcess = false;
   Map cryptoMap = {};
 
@@ -77,7 +77,81 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                (!dataPresent) ? const NoDataWidget() : const DataWidget(),
+                (!dataPresent)
+                    ? const NoDataWidget()
+                    : SizedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'BTCUSD',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40,
+                                  ),
+                                ),
+                                Text(
+                                  DateFormat.yMMMEd()
+                                      .add_Hms()
+                                      .format(DateTime.now()),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('OPEN'),
+                                    Text('\$ ${cryptoMap['open']}'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('HIGH'),
+                                    Text('\$ ${cryptoMap['high']}'),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('LOW'),
+                                    Text('\$ ${cryptoMap['low']}'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('LAST'),
+                                    Text('\$ ${cryptoMap['last']}'),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text('VOLUME'),
+                            Text('\$ ${cryptoMap['volume']}'),
+                          ],
+                        ),
+                      ),
               ],
             ),
           ),
