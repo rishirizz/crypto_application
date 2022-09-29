@@ -1,3 +1,4 @@
+import 'package:crypto_app/screens/no_data_screen.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCurrencyScreen extends StatefulWidget {
@@ -8,6 +9,8 @@ class CryptoCurrencyScreen extends StatefulWidget {
 }
 
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
+  bool dataPresent = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,51 +21,55 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
             Icons.sync,
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 8,
-                    child: Container(
-                      height: 60,
-                      padding: const EdgeInsets.all(8),
-                      child: Stack(
-                        alignment: Alignment.centerRight,
-                        children: [
-                          TextField(
-                            onChanged: (value) {
-                              // customersSearchString = value;
-                            },
-                            decoration: InputDecoration(
-                              fillColor: Colors.black.withOpacity(0.1),
-                              filled: true,
-                              hintText: 'Enter currency pair',
-                              hintStyle:
-                                  const TextStyle(fontWeight: FontWeight.w400),
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide.none,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 8,
+                      child: Container(
+                        height: 60,
+                        padding: const EdgeInsets.all(8),
+                        child: Stack(
+                          alignment: Alignment.centerRight,
+                          children: [
+                            TextField(
+                              onChanged: (value) {},
+                              decoration: InputDecoration(
+                                fillColor: Colors.black.withOpacity(0.1),
+                                filled: true,
+                                hintText: 'Enter currency pair',
+                                hintStyle: const TextStyle(
+                                    fontWeight: FontWeight.w400),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                ),
+                                contentPadding: const EdgeInsets.all(10),
                               ),
-                              contentPadding: const EdgeInsets.all(10),
                             ),
-                          ),
-                          Positioned(
-                            right: 10,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.search),
+                            Positioned(
+                              right: 10,
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.search),
+                              ),
                             ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                (!dataPresent) ? const NoDataWidget() : const SizedBox(),
+              ],
+            ),
           ),
         ),
       ),
