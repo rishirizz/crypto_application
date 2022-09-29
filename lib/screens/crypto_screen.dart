@@ -1,3 +1,5 @@
+import 'package:crypto_app/api_service/api_service.dart';
+import 'package:crypto_app/screens/data_widget.dart';
 import 'package:crypto_app/screens/no_data_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +12,14 @@ class CryptoCurrencyScreen extends StatefulWidget {
 
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   bool dataPresent = false;
+  bool isApiCallProcess = false;
+  Map cryptoMap = {};
+
+  @override
+  void initState() {
+    super.initState();
+    getCryptoCurrency();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +77,25 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                (!dataPresent) ? const NoDataWidget() : const SizedBox(),
+                (!dataPresent) ? const NoDataWidget() : const DataWidget(),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  getCryptoCurrency() {
+    setState(() {
+      isApiCallProcess = true;
+    });
+    getCryptoCurrencyData().then((response) {
+      setState(() {
+        isApiCallProcess = false;
+        cryptoMap = Map<String, dynamic>.from(response);
+        debugPrint('Response is ====> $cryptoMap');
+      });
+    });
   }
 }
