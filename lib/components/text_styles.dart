@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 
 TextStyle cryptoNameStyle = const TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 30,
+  fontSize: 25,
 );
 
 TextStyle cryptoValueStyle = const TextStyle(
@@ -24,4 +24,8 @@ TextStyle secondaryTextStyle = const TextStyle(
 TextStyle tableHeadingTextStyle = const TextStyle(
   fontSize: 10,
   fontWeight: FontWeight.bold,
+);
+
+TextStyle tablePrimaryTextStyle = const TextStyle(
+  fontSize: 10,
 );

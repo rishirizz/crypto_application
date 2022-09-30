@@ -24,7 +24,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
     super.initState();
     cryptoTextController.text = '';
     getTickerData();
-    // getOrderBookData();
+    getOrderBookData();
   }
 
   @override
@@ -63,6 +63,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                 if (value.isEmpty) {
                                   setState(() {
                                     dataPresent = false;
+                                    isOrderBookViewed = false;
                                   });
                                 }
                               },
@@ -110,7 +111,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'ETHUSD',
+                                  cryptoTextController.text.toUpperCase(),
                                   style: cryptoNameStyle,
                                 ),
                                 Text(
@@ -258,7 +259,48 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                             ),
                                           ),
                                         ],
-                                      )
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: 5,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    'BID PRICE',
+                                                    style:
+                                                        tableHeadingTextStyle,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    'QTY',
+                                                    style:
+                                                        tableHeadingTextStyle,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    'QTY',
+                                                    style:
+                                                        tableHeadingTextStyle,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    'ASK PRICE',
+                                                    style:
+                                                        tableHeadingTextStyle,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }),
                                     ],
                                   ),
                                 ),
@@ -294,8 +336,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
     getCryptoCurrencyOrderBookData().then((response) {
       setState(() {
         isSecondApiCallProcess = false;
-        cryptoMap = Map<String, dynamic>.from(response);
-        // debugPrint('Response is ====> $cryptoMap');
+
+        // cryptoMap = Map<String, dynamic>.from(response);
+        debugPrint('Response is ====> $response');
       });
     });
   }
