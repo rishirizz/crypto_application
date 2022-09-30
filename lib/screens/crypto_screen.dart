@@ -138,7 +138,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                       style: primaryTextStyle,
                                     ),
                                     Text(
-                                      '\$ ${cryptoMap['open']}',
+                                      (cryptoMap['open'] != null)
+                                          ? '\$ ${cryptoMap['open']}'
+                                          : '-----',
                                       style: cryptoValueStyle,
                                     ),
                                   ],
@@ -151,7 +153,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                       style: primaryTextStyle,
                                     ),
                                     Text(
-                                      '\$ ${cryptoMap['high']}',
+                                      (cryptoMap['high'] != null)
+                                          ? '\$ ${cryptoMap['high']}'
+                                          : '-----',
                                       style: cryptoValueStyle,
                                     ),
                                   ],
@@ -172,7 +176,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                       style: primaryTextStyle,
                                     ),
                                     Text(
-                                      '\$ ${cryptoMap['low']}',
+                                      (cryptoMap['low'] != null)
+                                          ? '\$ ${cryptoMap['low']}'
+                                          : '-----',
                                       style: cryptoValueStyle,
                                     ),
                                   ],
@@ -185,7 +191,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                       style: primaryTextStyle,
                                     ),
                                     Text(
-                                      '\$ ${cryptoMap['last']}',
+                                      (cryptoMap['last'] != null)
+                                          ? '\$ ${cryptoMap['last']}'
+                                          : '-----',
                                       style: cryptoValueStyle,
                                     ),
                                   ],
@@ -200,7 +208,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                               style: primaryTextStyle,
                             ),
                             Text(
-                              '\$ ${cryptoMap['volume']}',
+                              (cryptoMap['volume'] != null)
+                                  ? '\$ ${cryptoMap['volume']}'
+                                  : '-----',
                               style: cryptoValueStyle,
                             ),
                             const SizedBox(
@@ -270,6 +280,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                           itemCount: 5,
                                           itemBuilder: (BuildContext context,
                                               int index) {
+                                            int reverseIndex = asksList.length -
+                                                1 -
+                                                index; //reversing the order for asksList
                                             return Row(
                                               children: [
                                                 Expanded(
@@ -282,7 +295,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    bidsList[index][0]
+                                                    bidsList[index][1]
                                                         .toString(),
                                                     style:
                                                         tablePrimaryTextStyle,
@@ -290,16 +303,18 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    'QTY',
+                                                    asksList[reverseIndex][1]
+                                                        .toString(),
                                                     style:
-                                                        tableHeadingTextStyle,
+                                                        tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    'ASK PRICE',
+                                                    asksList[reverseIndex][0]
+                                                        .toString(),
                                                     style:
-                                                        tableHeadingTextStyle,
+                                                        tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                               ],
