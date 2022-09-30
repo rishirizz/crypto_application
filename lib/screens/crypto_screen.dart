@@ -18,6 +18,8 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   bool isOrderBookViewed = false;
   Map cryptoMap = {};
   TextEditingController cryptoTextController = TextEditingController();
+  List<List> asksList = [];
+  List<List> bidsList = [];
 
   @override
   void initState() {
@@ -336,9 +338,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
     getCryptoCurrencyOrderBookData().then((response) {
       setState(() {
         isSecondApiCallProcess = false;
-
-        // cryptoMap = Map<String, dynamic>.from(response);
-        debugPrint('Response is ====> $response');
+        asksList = List<List<dynamic>>.from(response['asks']);
+        bidsList = List<List<dynamic>>.from(response['bids']);
+        debugPrint('Response is ====> $asksList');
       });
     });
   }
