@@ -287,32 +287,46 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                               children: [
                                                 Expanded(
                                                   child: Text(
-                                                    bidsList[index][0]
-                                                        .toString(),
+                                                    (bidsList[index][0] != null)
+                                                        ? bidsList[index][0]
+                                                            .toString()
+                                                        : '-----',
                                                     style:
                                                         tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    bidsList[index][1]
-                                                        .toString(),
+                                                    (bidsList[index][1] != null)
+                                                        ? bidsList[index][1]
+                                                            .toString()
+                                                        : '-----',
                                                     style:
                                                         tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    asksList[reverseIndex][1]
-                                                        .toString(),
+                                                    (asksList[reverseIndex]
+                                                                [1] !=
+                                                            null)
+                                                        ? asksList[reverseIndex]
+                                                                [1]
+                                                            .toString()
+                                                        : '-----',
                                                     style:
                                                         tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    asksList[reverseIndex][0]
-                                                        .toString(),
+                                                    (asksList[reverseIndex]
+                                                                [0] !=
+                                                            null)
+                                                        ? asksList[reverseIndex]
+                                                                [0]
+                                                            .toString()
+                                                        : '-----',
                                                     style:
                                                         tablePrimaryTextStyle,
                                                   ),
