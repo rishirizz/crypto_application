@@ -37,6 +37,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
             ? FloatingActionButton(
                 onPressed: () {
                   getTickerData();
+                  getOrderBookData();
                 },
                 child: const Icon(
                   Icons.sync,
@@ -252,17 +253,26 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                               style: tableHeadingTextStyle,
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'QTY',
-                                              style: tableHeadingTextStyle,
-                                            ),
+                                          const SizedBox(
+                                            width: 10,
                                           ),
                                           Expanded(
                                             child: Text(
                                               'QTY',
                                               style: tableHeadingTextStyle,
                                             ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'QTY',
+                                              style: tableHeadingTextStyle,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
                                           ),
                                           Expanded(
                                             child: Text(
@@ -287,7 +297,10 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                               children: [
                                                 Expanded(
                                                   child: Text(
-                                                    (bidsList[index][0] != null)
+                                                    (bidsList.isNotEmpty &&
+                                                            bidsList[index]
+                                                                    [0] !=
+                                                                null)
                                                         ? bidsList[index][0]
                                                             .toString()
                                                         : '-----',
@@ -295,9 +308,15 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                                         tablePrimaryTextStyle,
                                                   ),
                                                 ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
                                                 Expanded(
                                                   child: Text(
-                                                    (bidsList[index][1] != null)
+                                                    (bidsList.isNotEmpty &&
+                                                            bidsList[index]
+                                                                    [1] !=
+                                                                null)
                                                         ? bidsList[index][1]
                                                             .toString()
                                                         : '-----',
@@ -305,11 +324,15 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                                         tablePrimaryTextStyle,
                                                   ),
                                                 ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
                                                 Expanded(
                                                   child: Text(
-                                                    (asksList[reverseIndex]
-                                                                [1] !=
-                                                            null)
+                                                    (asksList.isNotEmpty &&
+                                                            asksList[reverseIndex]
+                                                                    [1] !=
+                                                                null)
                                                         ? asksList[reverseIndex]
                                                                 [1]
                                                             .toString()
@@ -318,11 +341,15 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                                         tablePrimaryTextStyle,
                                                   ),
                                                 ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
                                                 Expanded(
                                                   child: Text(
-                                                    (asksList[reverseIndex]
-                                                                [0] !=
-                                                            null)
+                                                    (asksList.isNotEmpty &&
+                                                            asksList[reverseIndex]
+                                                                    [0] !=
+                                                                null)
                                                         ? asksList[reverseIndex]
                                                                 [0]
                                                             .toString()
