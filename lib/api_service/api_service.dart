@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:crypto_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 
-Future getCryptoCurrencyTickerData() async {
+Future getCryptoCurrencyTickerData(String path) async {
   Uri url = Uri.parse(cryptoApiTickerUrl + path);
   final response = await http.get(
     url,
@@ -15,7 +15,7 @@ Future getCryptoCurrencyTickerData() async {
   }
 }
 
-Future getCryptoCurrencyOrderBookData() async {
+Future getCryptoCurrencyOrderBookData(String path) async {
   Uri url = Uri.parse(cryptoApiOrderBookUrl + path);
   final response = await http.get(
     url,

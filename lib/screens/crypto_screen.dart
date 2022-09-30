@@ -25,8 +25,6 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   void initState() {
     super.initState();
     cryptoTextController.text = '';
-    getTickerData();
-    getOrderBookData();
   }
 
   @override
@@ -86,11 +84,13 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                               right: 10,
                               child: IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    if (cryptoTextController.text.length > 3) {
+                                  if (cryptoTextController.text.length > 3) {
+                                    setState(() {
                                       dataPresent = true;
-                                    }
-                                  });
+                                    });
+                                    getTickerData();
+                                    getOrderBookData();
+                                  }
                                 },
                                 icon: const Icon(Icons.search),
                               ),
@@ -376,11 +376,11 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
     );
   }
 
-  getTickerData() {
+  getTickerData() async {
     setState(() {
       isApiCallProcess = true;
     });
-    getCryptoCurrencyTickerData().then((response) {
+    getCryptoCurrencyTickerData(cryptoTextController.text).then((response) {
       setState(() {
         isApiCallProcess = false;
         cryptoMap = Map<String, dynamic>.from(response);
@@ -393,7 +393,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
     setState(() {
       isSecondApiCallProcess = true;
     });
-    getCryptoCurrencyOrderBookData().then((response) {
+    getCryptoCurrencyOrderBookData(cryptoTextController.text).then((response) {
       setState(() {
         isSecondApiCallProcess = false;
         asksList = List<List<dynamic>>.from(response['asks']);

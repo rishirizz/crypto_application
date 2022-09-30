@@ -1,4 +1,3 @@
-const String cryptoApiTickerUrl = 'https://www.bitstamp.net/api/v2/ticker';
+const String cryptoApiTickerUrl = 'https://www.bitstamp.net/api/v2/ticker/';
 const String cryptoApiOrderBookUrl =
-    'https://www.bitstamp.net/api/v2/order_book';
-const String path = '/ethusd';
+    'https://www.bitstamp.net/api/v2/order_book/';
