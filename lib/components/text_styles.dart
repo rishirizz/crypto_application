@@ -22,10 +22,10 @@ TextStyle secondaryTextStyle = const TextStyle(
 );
 
 TextStyle tableHeadingTextStyle = const TextStyle(
-  fontSize: 10,
+  fontSize: 12,
   fontWeight: FontWeight.bold,
 );
 
 TextStyle tablePrimaryTextStyle = const TextStyle(
-  fontSize: 10,
+  fontSize: 12,
 );

@@ -274,16 +274,18 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                               children: [
                                                 Expanded(
                                                   child: Text(
-                                                    'BID PRICE',
+                                                    bidsList[index][0]
+                                                        .toString(),
                                                     style:
-                                                        tableHeadingTextStyle,
+                                                        tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    'QTY',
+                                                    bidsList[index][0]
+                                                        .toString(),
                                                     style:
-                                                        tableHeadingTextStyle,
+                                                        tablePrimaryTextStyle,
                                                   ),
                                                 ),
                                                 Expanded(
