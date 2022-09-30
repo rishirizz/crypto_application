@@ -20,6 +20,53 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   TextEditingController cryptoTextController = TextEditingController();
   List<List> asksList = [];
   List<List> bidsList = [];
+  List<String> cryptoCurrencyList = [
+    'btcusd',
+    'btceur',
+    'btcgbp',
+    'btcpax',
+    'btcusdc',
+    'gbpusd',
+    'gbpeur',
+    'eurusd',
+    'xrpusd',
+    'xrpeur',
+    'xrpbtc',
+    'xrpgbp',
+    'xrppax',
+    'ltcusd',
+    'ltceur',
+    'ltcbtc',
+    'ltcgbp',
+    'ethusd',
+    'etheur',
+    'ethbtc',
+    'ethgbp',
+    'ethpax',
+    'ethusdc',
+    'bchusd',
+    'bcheur',
+    'bchbtc',
+    'bchgbp',
+    'paxusd',
+    'paxeur',
+    'paxgbp',
+    'xlmbtc',
+    'xlmusd',
+    'xlmeur',
+    'xlmgbp',
+    'linkusd',
+    'linkeur',
+    'linkgbp',
+    'linkbtc',
+    'linketh',
+    'omgusd',
+    'omgeur',
+    'omggbp',
+    'omgbtc',
+    'usdcusd',
+    'usdceur',
+  ];
 
   @override
   void initState() {
@@ -58,33 +105,32 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                         child: Stack(
                           alignment: Alignment.centerRight,
                           children: [
-                            TextField(
-                              onChanged: (value) {
-                                cryptoTextController.text = value;
-                                if (value.isEmpty) {
+                            Autocomplete<String>(
+                              optionsBuilder:
+                                  (TextEditingValue textEditingValue) {
+                                if (textEditingValue.text == '') {
                                   setState(() {
                                     dataPresent = false;
                                     isOrderBookViewed = false;
                                   });
+                                  return const Iterable<String>.empty();
                                 }
+                                return cryptoCurrencyList
+                                    .where((String option) {
+                                  return option.contains(
+                                      textEditingValue.text.toLowerCase());
+                                });
                               },
-                              decoration: InputDecoration(
-                                fillColor: Colors.black.withOpacity(0.1),
-                                filled: true,
-                                hintText: 'Enter currency pair',
-                                hintStyle: const TextStyle(
-                                    fontWeight: FontWeight.w400),
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                contentPadding: const EdgeInsets.all(10),
-                              ),
+                              onSelected: (String selection) {
+                                debugPrint('You just selected $selection');
+                                cryptoTextController.text = selection;
+                              },
                             ),
                             Positioned(
                               right: 10,
                               child: IconButton(
                                 onPressed: () {
-                                  if (cryptoTextController.text.length > 3) {
+                                  if (cryptoTextController.text.isNotEmpty) {
                                     setState(() {
                                       dataPresent = true;
                                     });
@@ -401,5 +447,11 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
         debugPrint('Response is ====> $asksList');
       });
     });
+  }
+
+  @override
+  void dispose() {
+    cryptoTextController.dispose();
+    super.dispose();
   }
 }
